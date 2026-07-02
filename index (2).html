@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran - Kid's Therapy Center</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff; /* Soft blue background */
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border-top: 8px solid #1d4ed8; /* Blue accent */
+        }
+        
+        /* --- TAMPILAN HALAMAN AWAL (INFO) --- */
+        #info-section {
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+        .desc {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 25px;
+        }
+        .address-box {
+            background-color: #fef08a; /* Soft yellow matching the logo */
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            margin-bottom: 30px;
+            text-align: left;
+            border-left: 5px solid #ca8a04;
+        }
+        .btn-utama {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+            transition: 0.2s;
+            width: 100%;
+        }
+        .btn-utama:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* --- TAMPILAN HALAMAN FORMULIR --- */
+        #form-section {
+            padding: 40px 30px;
+            display: none; /* Disembunyikan di awal */
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+        }
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        input:focus, textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+        .btn-kembali {
+            background-color: #94a3b8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        /* --- TOMBOL KIRIM BARU (PENGGANTI WA) --- */
+        .btn-kirim {
+            background-color: #2563eb; 
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+            transition: 0.2s;
+        }
+        .btn-kirim:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* --- TAMPILAN HALAMAN SUKSES PENGGANTI WA --- */
+        #success-section {
+            padding: 60px 30px;
+            text-align: center;
+            display: none; /* Disembunyikan di awal */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- HALAMAN 1: INFORMASI KLINIK -->
+    <div id="info-section">
+        <img src="logo_ktc.png" alt="Logo Kid's Therapy Center" class="logo" onerror="this.src='https://via.placeholder.com/150?text=Logo+KTC'">
+        
+        <h1>Kid's Therapy Center & Homeschooling Sriwijaya</h1>
+        
+        <p class="desc">
+            Pusat terapi dan pendidikan khusus terpercaya untuk mengoptimalkan potensi dan perkembangan buah hati Anda. Kami menyediakan layanan terapi profesional dan program homeschooling yang disesuaikan dengan kebutuhan khusus anak.
+        </p>
+
+        <div class="address-box">
+            <strong>📍 Lokasi Kami:</strong><br>
+            Tpi I No.3, Kalidoni, Kec. Kalidoni, Kota Palembang, Sumatera Selatan 30162.<br>
+            <i>(Buka pkl 08.00 - Tutup pkl 17.00)</i>
+        </div>
+
+        <button class="btn-utama" onclick="bukaForm()">Pendaftaran Peserta Didik Baru</button>
+    </div>
+
+    <!-- HALAMAN 2: FORMULIR PENDAFTARAN -->
+    <div id="form-section">
+        <button class="btn-kembali" onclick="kembaliKeInfo()">🔙 Kembali</button>
+        
+        <div class="form-header">
+            <h2 style="color: #1e3a8a; margin-top:0;">Formulir Pendaftaran</h2>
+            <p style="color: #64748b; font-size: 14px;">Silakan isi data anak dengan lengkap.</p>
+        </div>
+
+        <div class="form-group">
+            <label>Nama Lengkap Anak</label>
+            <input type="text" id="namaAnak" placeholder="Masukkan nama anak..." required>
+        </div>
+
+        <div class="form-group">
+            <label>Usia Anak (Tahun)</label>
+            <input type="number" id="usiaAnak" placeholder="Contoh: 5" required>
+        </div>
+
+        <div class="form-group">
+            <label>Nama Orang Tua / Wali</label>
+            <input type="text" id="namaOrtu" placeholder="Masukkan nama Anda..." required>
+        </div>
+
+        <div class="form-group">
+            <label>Kebutuhan / Keluhan Utama</label>
+            <select id="kebutuhan">
+                <option value="" disabled selected>-- Pilih Kondisi --</option>
+                <option value="Speech Delay (Keterlambatan Bicara)">Speech Delay (Keterlambatan Bicara)</option>
+                <option value="Autism Spectrum Disorder (ASD)">Autism Spectrum Disorder (ASD)</option>
+                <option value="ADHD / Hiperaktif">ADHD / Hiperaktif</option>
+                <option value="Kesulitan Belajar">Kesulitan Belajar</option>
+                <option value="Lainnya / Ingin Konsultasi Dulu">Lainnya / Ingin Konsultasi Dulu</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Pesan Tambahan (Opsional)</label>
+            <textarea id="pesanTambahan" rows="3" placeholder="Tuliskan riwayat atau pesan tambahan jika ada..."></textarea>
+        </div>
+
+        <!-- Tombol baru: Langsung memproses pendaftaran di web -->
+        <button class="btn-kirim" onclick="prosesPendaftaran()">
+            Kirim Pendaftaran
+        </button>
+    </div>
+
+    <!-- HALAMAN 3: PESAN SUKSES PENDAFTARAN -->
+    <div id="success-section">
+        <h2 style="color: #16a34a; font-size: 28px;">✅ Pendaftaran Berhasil!</h2>
+        <p style="color: #4b5563; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+            Terima kasih, data pendaftaran ananda telah tersimpan ke dalam sistem kami. Tim Kid's Therapy Center akan segera menghubungi Anda untuk informasi jadwal lebih lanjut.
+        </p>
+        <button class="btn-utama" onclick="kembaliKeAwal()">Selesai & Kembali ke Awal</button>
+    </div>
+
+</div>
+
+<script>
+    // Fungsi untuk berpindah layar dari Info ke Formulir
+    function bukaForm() {
+        document.getElementById('info-section').style.display = 'none';
+        document.getElementById('form-section').style.display = 'block';
+    }
+
+    // Fungsi untuk kembali ke layar Info
+    function kembaliKeInfo() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('info-section').style.display = 'block';
+    }
+
+    // Fungsi untuk memproses pendaftaran dan menampilkan halaman sukses
+    function prosesPendaftaran() {
+        // 1. Ambil data dari inputan untuk di-cek
+        let nama = document.getElementById('namaAnak').value;
+        let usia = document.getElementById('usiaAnak').value;
+        let ortu = document.getElementById('namaOrtu').value;
+        let kebutuhan = document.getElementById('kebutuhan').value;
+
+        // 2. Validasi: Pastikan data wajib tidak kosong
+        if(nama === "" || usia === "" || ortu === "" || kebutuhan === "") {
+            alert("Mohon lengkapi Nama Anak, Usia, Nama Orang Tua, dan Kebutuhan terlebih dahulu sebelum mengirim.");
+            return;
+        }
+
+        // 3. Sembunyikan form, lalu tampilkan halaman sukses
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('success-section').style.display = 'block';
+    }
+
+    // Fungsi untuk tombol Selesai di halaman sukses
+    function kembaliKeAwal() {
+        // Kosongkan kembali isi formulir untuk pendaftar berikutnya
+        document.getElementById('namaAnak').value = '';
+        document.getElementById('usiaAnak').value = '';
+        document.getElementById('namaOrtu').value = '';
+        document.getElementById('kebutuhan').value = '';
+        document.getElementById('pesanTambahan').value = '';
+
+        // Kembali ke halaman awal
+        document.getElementById('success-section').style.display = 'none';
+        document.getElementById('info-section').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
