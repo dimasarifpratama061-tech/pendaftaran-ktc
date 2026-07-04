@@ -187,6 +187,16 @@
         </div>
 
         <div class="form-group">
+            <label>Nomor Telepon / WhatsApp Orang Tua</label>
+            <input type="text" id="noTelp" placeholder="Contoh: 081234567890" required>
+        </div>
+
+        <div class="form-group">
+            <label>Alamat Rumah</label>
+            <textarea id="alamatRumah" rows="2" placeholder="Masukkan alamat lengkap rumah Anda..." required></textarea>
+        </div>
+
+        <div class="form-group">
             <label>Kebutuhan / Keluhan Utama</label>
             <select id="kebutuhan">
                 <option value="" disabled selected>-- Pilih Kondisi --</option>
@@ -233,17 +243,19 @@
         document.getElementById('info-section').style.display = 'block';
     }
 
-    // Fungsi untuk memproses pendaftaran dan menampilkan halaman sukses
+  // Fungsi untuk memproses pendaftaran dan menampilkan halaman sukses
     function prosesPendaftaran() {
         // 1. Ambil data dari inputan untuk di-cek
         let nama = document.getElementById('namaAnak').value;
         let usia = document.getElementById('usiaAnak').value;
         let ortu = document.getElementById('namaOrtu').value;
+        let telp = document.getElementById('noTelp').value;
+        let alamat = document.getElementById('alamatRumah').value;
         let kebutuhan = document.getElementById('kebutuhan').value;
 
         // 2. Validasi: Pastikan data wajib tidak kosong
-        if(nama === "" || usia === "" || ortu === "" || kebutuhan === "") {
-            alert("Mohon lengkapi Nama Anak, Usia, Nama Orang Tua, dan Kebutuhan terlebih dahulu sebelum mengirim.");
+        if(nama === "" || usia === "" || ortu === "" || telp === "" || alamat === "" || kebutuhan === "") {
+            alert("Mohon lengkapi Nama Anak, Usia, Nama Orang Tua, Nomor Telepon, Alamat, dan Kebutuhan terlebih dahulu sebelum mengirim.");
             return;
         }
 
@@ -252,12 +264,14 @@
         document.getElementById('success-section').style.display = 'block';
     }
 
-    // Fungsi untuk tombol Selesai di halaman sukses
+// Fungsi untuk tombol Selesai di halaman sukses
     function kembaliKeAwal() {
         // Kosongkan kembali isi formulir untuk pendaftar berikutnya
         document.getElementById('namaAnak').value = '';
         document.getElementById('usiaAnak').value = '';
         document.getElementById('namaOrtu').value = '';
+        document.getElementById('noTelp').value = '';
+        document.getElementById('alamatRumah').value = '';
         document.getElementById('kebutuhan').value = '';
         document.getElementById('pesanTambahan').value = '';
 
