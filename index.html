@@ -243,27 +243,62 @@
         document.getElementById('info-section').style.display = 'block';
     }
 
-  // Fungsi untuk memproses pendaftaran dan menampilkan halaman sukses
-    function prosesPendaftaran() {
-        // 1. Ambil data dari inputan untuk di-cek
-        let nama = document.getElementById('namaAnak').value;
-        let usia = document.getElementById('usiaAnak').value;
-        let ortu = document.getElementById('namaOrtu').value;
-        let telp = document.getElementById('noTelp').value;
-        let alamat = document.getElementById('alamatRumah').value;
-        let kebutuhan = document.getElementById('kebutuhan').value;
+ // Fungsi untuk memproses pendaftaran dan menampilkan halaman sukses
+  function prosesPendaftaran() {
+      // 1. Ambil data dari inputan untuk di-cek
+      let nama = document.getElementById('namaAnak').value;
+      let usia = document.getElementById('usiaAnak').value;
+      let ortu = document.getElementById('namaOrtu').value;
+      let telp = document.getElementById('noTelp').value;
+      let alamat = document.getElementById('alamatRumah').value;
+      let kebutuhan = document.getElementById('kebutuhan').value;
+      let pesan = document.getElementById('pesanTambahan').value; // Mengambil pesan tambahan
 
-        // 2. Validasi: Pastikan data wajib tidak kosong
-        if(nama === "" || usia === "" || ortu === "" || telp === "" || alamat === "" || kebutuhan === "") {
-            alert("Mohon lengkapi Nama Anak, Usia, Nama Orang Tua, Nomor Telepon, Alamat, dan Kebutuhan terlebih dahulu sebelum mengirim.");
-            return;
-        }
+      // 2. Validasi: Pastikan data wajib tidak kosong
+      if(nama === "" || usia === "" || ortu === "" || telp === "" || alamat === "" || kebutuhan === "") {
+          alert("Mohon lengkapi Nama Anak, Usia, Nama Orang Tua, Nomor Telepon, Alamat, dan Kebutuhan terlebih dahulu sebelum mengirim.");
+          return;
+      }
 
-        // 3. Sembunyikan form, lalu tampilkan halaman sukses
-        document.getElementById('form-section').style.display = 'none';
-        document.getElementById('success-section').style.display = 'block';
-    }
+      // Ubah teks tombol menjadi "Mengirim..." agar user tahu data sedang diproses
+      const btnKirim = document.querySelector('.btn-kirim');
+      const textAwal = btnKirim.innerText;
+      btnKirim.innerText = "Mengirim...";
+      btnKirim.disabled = true;
 
+      // 3. Menyusun URL parameter data sesuai variabel parameter Apps Script Anda
+      // Pastikan nama variabel (seperti namaAnak, usiaAnak, dll) sama persis dengan kode doGet(e) Anda
+      let urlScript = "https://script.google.com/macros/s/AKfycbwJ6owF1reAo7xTfbu0qjr1R_CDkejshLFq0KW2gpYXFl8lZEeF0rGUvuSNu6nk58Lz/exec; 
+      
+      let parameterData = `?namaAnak=${encodeURIComponent(nama)}` +
+                          `&usiaAnak=${encodeURIComponent(usia)}` +
+                          `&namaOrtu=${encodeURIComponent(ortu)}` +
+                          `&noTelp=${encodeURIComponent(telp)}` +
+                          `&alamatRumah=${encodeURIComponent(alamat)}` +
+                          `&kebutuhan=${encodeURIComponent(kebutuhan)}` +
+                          `&pesanTambahan=${encodeURIComponent(pesan)}`;
+
+      // 4. Proses Pengiriman Data menggunakan FETCH dengan mode 'no-cors'
+      fetch(urlScript + parameterData, {
+          method: "GET",
+          mode: "no-cors"
+      })
+      .then(() => {
+          // Kembalikan status tombol ke semula
+          btnKirim.innerText = textAwal;
+          btnKirim.disabled = false;
+
+          // Sembunyikan form, lalu tampilkan halaman sukses
+          document.getElementById('form-section').style.display = 'none';
+          document.getElementById('success-section').style.display = 'block';
+      })
+      .catch(error => {
+          console.error("Terjadi kesalahan:", error);
+          alert("Gagal mengirim pendaftaran, silakan coba beberapa saat lagi.");
+          btnKirim.innerText = textAwal;
+          btnKirim.disabled = false;
+      });
+  }
 // Fungsi untuk tombol Selesai di halaman sukses
     function kembaliKeAwal() {
         // Kosongkan kembali isi formulir untuk pendaftar berikutnya
